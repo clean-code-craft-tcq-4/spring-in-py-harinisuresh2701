@@ -12,11 +12,13 @@ def calculateStats(numbers):
   return x
 
 def checkAndAlert(maxThreshold, number):
+  emailAlert = []
+  ledAlert = []
   for i in number:
     if i > maxThreshold:
-      emailAlert = True
-      ledAlert = True
+      emailAlert.append(True)
+      ledAlert.append(True)
     else:
-      emailAlert = False
-      ledAlert = False
+      emailAlert.append(False)
+      ledAlert.append(False)
   return emailAlert , ledAlert
