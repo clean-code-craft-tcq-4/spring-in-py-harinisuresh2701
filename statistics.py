@@ -6,6 +6,6 @@ def calculateStats(numbers):
     total = sum(numbers)
     average = total/len(numbers)
     x = {"avg":average,"min":minimum,"max":maximum}
-   else:
+  else:
     x = float("NaN")  
   return x
