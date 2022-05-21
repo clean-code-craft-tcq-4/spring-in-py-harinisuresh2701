@@ -15,19 +15,27 @@ class StatsTest(unittest.TestCase):
     assert math.isnan(computedStats["avg"])
     assert math.isnan(computedStats["max"])
     assert math.isnan(computedStats["min"])
-    # All fields of computedStats (average, max, min) must be
-    # nan (not-a-number), as defined in the math package
-    # Design the assert here.
-    # Use nan and isnan in https://docs.python.org/3/library/math.html
+            
+  def checkAndAlert(maxThreshold, number):
+    for i in number:
+      if i > maxThreshold:
+        emailSent = True
+        ledGlow = True
+      else:
+        emailSent = False
+        ledGlow = False
+    return (emailSent,ledGlow)
+  
+  def test_raise_alerts_when_max_above_threshold(self):
+    maxThreshold = 10.5
+    emailAlert, ledAlert = checkAndAlert(maxThreshold, [22.6, 12.5, 3.7])
+    for i in [22.6, 12.5, 3.7]:
+      if i > maxThreshold:        
+        self.assertTrue(emailAlert)
+        self.assertTrue(ledAlert)
+      else:
+        self.assertFalse(emailAlert)
+        self.assertFalse(ledAlert)
         
-  #def test_raise_alerts_when_max_above_threshold(self):
-  #  emailAlert = EmailAlert()
-  #  ledAlert = LEDAlert()
-  #  maxThreshold = 10.5
-  #  statsAlerter = StatsAlerter(maxThreshold, [emailAlert, ledAlert])
-  #  statsAlerter.checkAndAlert([22.6, 12.5, 3.7])
-  #  self.assertTrue(emailAlert.emailSent)
-  #  self.assertTrue(ledAlert.ledGlows)
-
 if __name__ == "__main__":
   unittest.main()
