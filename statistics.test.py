@@ -15,20 +15,10 @@ class StatsTest(unittest.TestCase):
     assert math.isnan(computedStats["avg"])
     assert math.isnan(computedStats["max"])
     assert math.isnan(computedStats["min"])
-            
-  def checkAndAlert(maxThreshold, number):
-    for i in number:
-      if i > maxThreshold:
-        emailSent = True
-        ledGlow = True
-      else:
-        emailSent = False
-        ledGlow = False
-    return (emailSent,ledGlow)
   
   def test_raise_alerts_when_max_above_threshold(self):
     maxThreshold = 10.5
-    emailAlert, ledAlert = checkAndAlert(maxThreshold, [22.6, 12.5, 3.7])
+    emailAlert, ledAlert = statistics.checkAndAlert(maxThreshold, [22.6, 12.5, 3.7])
     for i in [22.6, 12.5, 3.7]:
       if i > maxThreshold:        
         self.assertTrue(emailAlert)
