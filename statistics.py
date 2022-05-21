@@ -10,3 +10,13 @@ def calculateStats(numbers):
     y = float("NaN")
     x = {"avg":y,"min":y,"max":y} 
   return x
+
+def checkAndAlert(maxThreshold, number):
+  for i in number:
+    if i > maxThreshold:
+      emailAlert = True
+      ledAlert = True
+    else:
+      emailAlert = False
+      ledAlert = False
+  return emailAlert , ledAlert
