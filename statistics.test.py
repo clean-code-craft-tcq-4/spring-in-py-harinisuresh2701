@@ -18,14 +18,15 @@ class StatsTest(unittest.TestCase):
   
   def test_raise_alerts_when_max_above_threshold(self):
     maxThreshold = 10.5
-    emailAlert, ledAlert = statistics.checkAndAlert(maxThreshold, [22.6, 12.5, 3.7])
-    for i in [22.6, 12.5, 3.7]:
-      if i > maxThreshold:        
-        self.assertTrue(emailAlert)
-        self.assertTrue(ledAlert)
+    array = [22.6, 12.5, 3.7]
+    emailAlert, ledAlert = statistics.checkAndAlert(maxThreshold, array)
+    for i in range(len(array)):
+      if array[i] > maxThreshold:        
+        self.assertTrue(emailAlert[i])
+        self.assertTrue(ledAlert[i])
       else:
-        self.assertFalse(emailAlert)
-        self.assertFalse(ledAlert)
+        self.assertFalse(emailAlert[i])
+        self.assertFalse(ledAlert[i])
         
 if __name__ == "__main__":
   unittest.main()
